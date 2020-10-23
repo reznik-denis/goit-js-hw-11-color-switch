@@ -2,19 +2,16 @@ import colors from './colors'
 import refs from './refs'
 
 let intervalId = null;
-let intervalStatus = false;
 
 export function startSwitchOnClick() {
-    intervalStatus = true;
-    intervalId = setInterval(() => {
+        intervalId = setInterval(() => {
         refs.body.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length - 1)];
     }, 1000);
-    btnStatus();
+    btnStatus(true);
 };
 
 export function stopSwitchOnClick() {
-    intervalStatus = false;
-    btnStatus();
+    btnStatus(false);
     clearInterval(intervalId);
 };
 
@@ -22,6 +19,6 @@ const randomIntegerFromInterval = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-function btnStatus() {
-    refs.start.disabled = intervalStatus ? true : false;
+function btnStatus(status) {
+    refs.start.disabled = status;
 }
